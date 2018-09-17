@@ -26,12 +26,17 @@ Enable sidecar injection
 kubectl label namespace default istio-injection=enabled
 ```
 
+Start the test app
+```
+kubectl apply -f test-app.yaml
+```
+
 ```
 export GATEWAY_URL=$(minikube ip):$(kubectl get svc istio-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
 ```
 ## Install taurus
 
-[Taurus](https://gettaurus.org/) is a tool to perform stress testing. I useded it to simulate users accessing the test service.
+[Taurus](https://gettaurus.org/) is a tool to perform stress testing. I used it to simulate users accessing the test service.
 
 ```
 pip install bzt
