@@ -27,13 +27,25 @@ kubectl label namespace default istio-injection=enabled
 ```
 
 ```
-export GATEWAY_URL=$(kubectl get po -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc istio-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
+export GATEWAY_URL=$(minikube ip):$(kubectl get svc istio-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
 ```
 ## Install taurus
 
 ```
 pip install bzt
 ```
+
+```
+bzt stress-test.yaml  -o settings.env.GATEWAY_URL=$GATEWAY_URL
+```
+
+## Trigger the 503 bug
+
+To see the service unavailable bug just trigger a rolling update of the test deployment.
+
+The behaviour that is seen is 503 http status codes when the update is triggered.
+
+![](images/status-codes.png)
 
 ## Reference
 

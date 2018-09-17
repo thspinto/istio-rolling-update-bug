@@ -127,6 +127,7 @@ metadata:
 spec:
   hosts:
   - test.example.com
+  - test.example.com:31380
   - test
   gateways:
   - gateway
