@@ -31,6 +31,8 @@ export GATEWAY_URL=$(minikube ip):$(kubectl get svc istio-ingressgateway -n isti
 ```
 ## Install taurus
 
+[Taurus](https://gettaurus.org/) is a tool to perform stress testing. I useded it to simulate users accessing the test service.
+
 ```
 pip install bzt
 ```
